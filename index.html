@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un sistema semplice per imprese di pulizie che vogliono organizzare richieste, preventivi e ricontatti.">
+  <meta name="theme-color" content="#17324d">
+  <title>Preventivi Sotto Controllo | Organizza richieste e preventivi</title>
+  <style>
+    :root { --navy:#17324d; --teal:#1f7a78; --pale:#f3f7f8; --ink:#182635; --muted:#5b6573; --line:#dfe7eb; --white:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); line-height:1.6; background:#fff; }
+    a { color:inherit; }
+    .wrap { width:min(1100px, calc(100% - 40px)); margin:0 auto; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.94); }
+    .nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { font-weight:850; color:var(--navy); letter-spacing:-.04em; font-size:1.05rem; }
+    .brand span { color:var(--teal); }
+    .nav a { text-decoration:none; font-weight:650; font-size:.93rem; }
+    .hero { background:linear-gradient(140deg,#f3f7f8 0%,#fff 62%,#e4f2f0 100%); padding:76px 0 66px; }
+    .hero-grid { display:grid; grid-template-columns:1.12fr .88fr; gap:48px; align-items:center; }
+    .eyebrow { color:var(--teal); font-weight:800; text-transform:uppercase; letter-spacing:.12em; font-size:.75rem; }
+    h1 { color:var(--navy); font-size:clamp(2.35rem,5vw,4.2rem); letter-spacing:-.055em; line-height:1.05; margin:14px 0 20px; }
+    h2 { color:var(--navy); font-size:clamp(1.7rem,3vw,2.5rem); line-height:1.15; letter-spacing:-.035em; margin:0 0 16px; }
+    h3 { color:var(--navy); margin:0 0 8px; line-height:1.25; }
+    p { margin:0 0 14px; }
+    .lead { font-size:1.15rem; color:#3e4d5b; max-width:620px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; gap:8px; padding:13px 18px; border-radius:12px; font-weight:800; text-decoration:none; border:1px solid transparent; transition:transform .15s ease; }
+    .btn:hover { transform:translateY(-1px); }
+    .primary { color:#fff; background:var(--teal); }
+    .secondary { color:var(--navy); border-color:#b9cbd1; background:#fff; }
+    .note { color:var(--muted); font-size:.86rem; margin-top:14px; }
+    .mockup { background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px; box-shadow:0 18px 60px rgba(23,50,77,.10); }
+    .mock-top { display:flex; justify-content:space-between; gap:12px; align-items:center; padding-bottom:15px; border-bottom:1px solid var(--line); margin-bottom:16px; }
+    .mock-title { font-weight:850; color:var(--navy); }
+    .pill { background:#e0f2ec; color:#236451; padding:5px 9px; border-radius:999px; font-size:.75rem; font-weight:800; }
+    .metric-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .metric { background:var(--pale); border-radius:12px; padding:14px; }
+    .metric small { color:var(--muted); display:block; }
+    .metric strong { color:var(--navy); font-size:1.5rem; }
+    .sample-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px solid var(--line); font-size:.9rem; }
+    .sample-row:last-child { border-bottom:0; }
+    .status { font-size:.75rem; padding:4px 8px; border-radius:8px; background:#fff1ce; color:#74540b; white-space:nowrap; }
+    section { padding:74px 0; }
+    .section-intro { max-width:680px; margin-bottom:30px; color:var(--muted); }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff; }
+    .num { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:11px; background:#e0f2ef; color:var(--teal); font-weight:900; margin-bottom:16px; }
+    .card p { color:var(--muted); font-size:.96rem; }
+    .soft { background:var(--pale); }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+    .checklist { padding:0; margin:20px 0 0; list-style:none; }
+    .checklist li { padding:10px 0 10px 30px; position:relative; border-bottom:1px solid var(--line); }
+    .checklist li:before { content:"✓"; color:var(--teal); font-weight:900; position:absolute; left:0; }
+    .price-card { border:1px solid #b7d6d2; background:#fff; border-radius:18px; padding:26px; box-shadow:0 10px 34px rgba(23,50,77,.06); }
+    .price { color:var(--navy); font-size:2.5rem; font-weight:900; letter-spacing:-.05em; }
+    .price small { font-size:.9rem; font-weight:600; color:var(--muted); letter-spacing:0; }
+    .faq { border-top:1px solid var(--line); padding:18px 0; }
+    .faq p { color:var(--muted); margin:8px 0 0; }
+    .cta { background:var(--navy); color:#fff; border-radius:22px; padding:42px; display:flex; justify-content:space-between; align-items:center; gap:28px; }
+    .cta h2 { color:#fff; }
+    .cta p { color:#d6e0e8; max-width:620px; }
+    footer { padding:30px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.86rem; }
+    footer .foot { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+    .legal { font-size:.8rem; color:var(--muted); }
+    @media (max-width:780px) {
+      .hero { padding:52px 0; }
+      .hero-grid,.split { grid-template-columns:1fr; gap:28px; }
+      .cards { grid-template-columns:1fr; }
+      .cta { display:block; padding:28px; }
+      .cta .btn { margin-top:10px; }
+      .nav { min-height:64px; }
+      .nav .nav-link { display:none; }
+      section { padding:56px 0; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#inizio" aria-label="Preventivi Sotto Controllo, home">PREVENTIVI <span>SOTTO CONTROLLO</span></a>
+    <a class="nav-link" href="#come-funziona">Come funziona</a>
+    <a class="nav-link" href="#offerta">Il progetto pilota</a>
+    <a class="btn primary" href="#contatti">Richiedi una demo</a>
+  </div>
+</header>
+
+<main id="inizio">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Per imprese di pulizie B2B</div>
+        <h1>Ogni preventivo ha un prossimo passo.</h1>
+        <p class="lead">Un sistema semplice per tenere sotto controllo richieste, preventivi e ricontatti, senza introdurre un software complesso nella tua attività.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contatti">Richiedi una demo gratuita</a>
+          <a class="btn secondary" href="files/demo-preventivi.xlsx" download>Scarica la demo Excel</a>
+        </div>
+        <p class="note">Esempio organizzativo da personalizzare. Nessuna promessa di aumento vendite: prima verifichiamo se è adatto al tuo processo.</p>
+      </div>
+      <div class="mockup" aria-label="Esempio illustrativo di dashboard">
+        <div class="mock-top"><div class="mock-title">Panoramica preventivi</div><span class="pill">Esempio demo</span></div>
+        <div class="metric-grid">
+          <div class="metric"><small>Richieste registrate</small><strong>12</strong></div>
+          <div class="metric"><small>Follow-up aperti</small><strong>4</strong></div>
+          <div class="metric"><small>Preventivi aperti</small><strong>6</strong></div>
+          <div class="metric"><small>Prossime azioni</small><strong>3</strong></div>
+        </div>
+        <div style="margin-top:18px;font-weight:800;color:#17324d">Prossimi passi</div>
+        <div class="sample-row"><span>Confermare sopralluogo</span><span class="status">Da fare</span></div>
+        <div class="sample-row"><span>Ricontattare sul preventivo</span><span class="status">In scadenza</span></div>
+        <div class="sample-row"><span>Preparare proposta</span><span class="status">Da fare</span></div>
+        <p class="note">Numeri e righe illustrativi, non risultati di un cliente reale.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Il problema</div>
+      <h2>Quando le richieste sono sparse, è difficile sapere cosa fare dopo.</h2>
+      <p class="section-intro">Tra sopralluoghi, turni, email e messaggi, può diventare complicato ricordare quali preventivi sono ancora aperti e chi va ricontattato. Il primo passo è capire se questo succede anche nella tua impresa.</p>
+      <div class="cards">
+        <article class="card"><div class="num">1</div><h3>Richieste in posti diversi</h3><p>Le informazioni possono restare sparse tra email, messaggi, fogli e appunti.</p></article>
+        <article class="card"><div class="num">2</div><h3>Prossimo passo poco chiaro</h3><p>Non sempre è registrato chi deve fare cosa e quando ricontattare.</p></article>
+        <article class="card"><div class="num">3</div><h3>Preventivi senza seguito</h3><p>Senza un processo semplice, alcune opportunità possono essere dimenticate.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" id="come-funziona">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">Come funziona</div>
+        <h2>Un piccolo sistema, costruito sul tuo modo di lavorare.</h2>
+        <p>Partiamo da un foglio semplice e lo adattiamo al processo che usi già. Niente software complicato e niente automazioni inutili.</p>
+        <ul class="checklist">
+          <li>Registro delle richieste in ingresso</li>
+          <li>Stato di ogni preventivo e relativo importo</li>
+          <li>Prossima azione e data di follow-up</li>
+          <li>Modelli di messaggio per le fasi ricorrenti</li>
+          <li>Breve consegna guidata per usarlo in autonomia</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>La demo include</h3>
+        <p>Un esempio in Excel con dashboard, richieste, preventivi, follow-up e istruzioni. I dati sono fittizi: servono a mostrare il metodo, non a rappresentare risultati reali.</p>
+        <div class="actions">
+          <a class="btn primary" href="files/demo-preventivi.xlsx" download>Scarica la demo</a>
+          <a class="btn secondary" href="files/presentazione-servizio.pdf" target="_blank" rel="noopener">Leggi la presentazione</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="offerta">
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">Progetto pilota</div>
+        <h2>Prima vediamo se serve davvero alla tua impresa.</h2>
+        <p>Il progetto pilota è un intervento delimitato: definiamo insieme cosa va organizzato, configuriamo il foglio e ti mostriamo come usarlo.</p>
+        <p class="legal">Il servizio è organizzativo: non garantisce più clienti o un aumento del fatturato. Il prezzo è un'ipotesi iniziale da confermare dopo la demo e la definizione del perimetro.</p>
+      </div>
+      <div class="price-card">
+        <div class="eyebrow">Prezzo di test</div>
+        <div class="price">149 € <small>una tantum</small></div>
+        <p>Per un setup iniziale con perimetro concordato.</p>
+        <ul class="checklist">
+          <li>Configurazione del foglio</li>
+          <li>Stati e fasi del processo</li>
+          <li>Prossime azioni e scadenze</li>
+          <li>Tre modelli di messaggio</li>
+          <li>Consegna guidata di 30 minuti</li>
+        </ul>
+        <div class="actions"><a class="btn primary" href="#contatti">Parliamone</a></div>
+        <p class="note">Nessun pagamento su questo sito: prima ci confrontiamo e concordiamo per iscritto il lavoro.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="wrap">
+      <div class="eyebrow">Domande frequenti</div>
+      <h2>Prima di partire</h2>
+      <div class="faq"><h3>È un software gestionale?</h3><p>No. È un sistema leggero basato su un foglio di calcolo, personalizzabile e utilizzabile con strumenti compatibili.</p></div>
+      <div class="faq"><h3>Garantisce più vendite?</h3><p>No. Aiuta a organizzare il processo. L'effetto dipende da come viene utilizzato, dai contatti e dall'attività commerciale.</p></div>
+      <div class="faq"><h3>Devo cambiare il modo in cui lavoro?</h3><p>L'obiettivo è adattare il sistema al processo attuale e migliorarlo solo dove serve.</p></div>
+      <div class="faq"><h3>Posso vedere prima come funziona?</h3><p>Sì. Puoi scaricare la demo con dati fittizi e chiedere una breve presentazione.</p></div>
+    </div>
+  </section>
+
+  <section id="contatti">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>Vediamo se può aiutare la tua impresa.</h2>
+          <p>Richiedi una demo breve. Ti mostreremo il sistema con dati fittizi e capiremo insieme se ha senso adattarlo al tuo processo.</p>
+        </div>
+        <a class="btn primary" href="mailto:INSERISCI-LA-TUA-EMAIL?subject=Richiesta%20demo%20Preventivi%20Sotto%20Controllo&body=Buongiorno%2C%20vorrei%20vedere%20la%20demo.%0A%0ANome%20azienda%3A%0ACome%20gestiamo%20oggi%20i%20preventivi%3A">Richiedi una demo</a>
+      </div>
+      <p class="note">Prima di pubblicare: sostituisci INSERISCI-LA-TUA-EMAIL con il tuo indirizzo email reale.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><strong>Preventivi Sotto Controllo</strong><br>Strumento organizzativo per imprese di pulizie B2B.</div>
+    <div>© <span id="year"></span> • <a href="mailto:INSERISCI-LA-TUA-EMAIL">Contatti</a></div>
+  </div>
+  <div class="wrap legal" style="margin-top:18px">
+    Prima della pubblicazione commerciale, aggiungi i dati identificativi dell'attività e le informazioni legali/privacy applicabili. Non raccogliamo dati tramite moduli in questa versione. I collegamenti email sono segnaposto finché non inserisci il tuo indirizzo.
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
